@@ -91,7 +91,7 @@ $x = $query->results(true);
                 {
                                        
                               
-                    echo("<li class='hidden-sm hidden-md hidden-lg'><a href='/users/album/album.php?album=$value[album_name]'><i class='fa fa-fw fa-book'></i> " . $value[album_name] . "</a></li>");
+                    echo("<li class='hidden-sm hidden-md hidden-lg'><a href='/Photo-Albums/Photo-Album/users/album/album.php?album=$value[album_name]'><i class='fa fa-fw fa-book'></i> " . $value[album_name] . "</a></li>");
 
                 
                 }
@@ -100,7 +100,7 @@ $x = $query->results(true);
 
               echo("<li class='hidden-sm hidden-md hidden-lg'><a href=''><i class='fa fa-fw fa'></i> </a></li>"); 
 
-             echo("<li class='hidden-sm hidden-md hidden-lg'><a href='/users/album/delete_album.php'><i class='fa fa-fw fa-cut'></i>Delete Album</a></li>");
+             echo("<li class='hidden-sm hidden-md hidden-lg'><a href='/Photo-Albums/Photo-Album/users/album/delete_album.php'><i class='fa fa-fw fa-cut'></i>Delete Album</a></li>");
 
 
             ?>
@@ -147,13 +147,13 @@ $x = $query->results(true);
                 {
                                        
                               
-                    echo("<li><a href='/users/album/album.php?album=$value[album_name]'><i class='fa fa-fw fa-book'></i>" . $value[album_name] . "</a></li>");
+                    echo("<li><a href='/Photo-Albums/Photo-Album/users/album/album.php?album=$value[album_name]'><i class='fa fa-fw fa-book'></i>" . $value[album_name] . "</a></li>");
                 }
 
                 echo("<li class='divider'></li>");
 
 
-         echo("<li><a href='/users/album/delete_album.php'><i class='fa fa-fw fa-cut'></i>Delete Album</a></li>");
+         echo("<li><a href='/Photo-Albums/Photo-Album/users/album/delete_album.php'><i class='fa fa-fw fa-cut'></i>Delete Album</a></li>");
 
 
             ?>

@@ -2,8 +2,8 @@
 <?php 
  
   $path = $_SERVER['DOCUMENT_ROOT'];
-  $path .= "/users/init.php";
  
+ $path .= "/Photo-Albums/Photo-Album/users/init.php";
  
   require_once ($path); 
   
