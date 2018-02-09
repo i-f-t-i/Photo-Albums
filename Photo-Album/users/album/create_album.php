@@ -31,11 +31,6 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 ?>
 
 <?php
-    
-   if (isset($_POST['formSubmit']))
-
-   {
-
 	if($_POST['formSubmit'] == "Submit") 
     {
 
@@ -121,7 +116,7 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 		}
 	}
             
-   }
+
     
 ?>
 
