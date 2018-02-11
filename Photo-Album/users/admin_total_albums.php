@@ -61,8 +61,8 @@ $album_info = $usersAlbumsQ->results(true);
 				foreach ($album_info as $Data) {
 				  ?>
 				  <tr>
-					<td><?=$Data[user_no]?></a></td>
-					<td><?=$Data[album_name]?></a></td>
+					<td><?=$Data['user_no']?></a></td>
+					<td><?=$Data['album_name']?></a></td>
 				  </tr>
 				  <?php
 				  

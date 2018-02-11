@@ -1,17 +1,42 @@
 <?php 
+  
+  
+
+
+$abs_us_root=$_SERVER['DOCUMENT_ROOT'];
+
+$self_path=explode("/", $_SERVER['PHP_SELF']);
+$self_path_length=count($self_path);
+$file_found=FALSE;
+
+for($i = 1; $i < $self_path_length; $i++){
+	array_splice($self_path, $self_path_length-$i, $i);
+	$us_url_root=implode("/",$self_path)."/";
+	
+	if (file_exists($abs_us_root.$us_url_root.'z_us_root.php')){
+		$file_found=TRUE;
+		break;
+	}else{
+		$file_found=FALSE;
+	}
+}
+
+require_once $abs_us_root.$us_url_root.'users/init.php';
  
-  $path = $_SERVER['DOCUMENT_ROOT'];
-  $path .= "/Photo-Albums/Photo-Album/users/init.php";
+$path_for = $us_url_root;
  
- 
-  require_once ($path); 
   
   ?>
 
 <?php
 
-   session_start();
+ if (isset($_GET['album']))
+
+   {
+   
    $_SESSION['getAlbumName'] = $_GET['album'];
+
+   }
 
 ?>
 
@@ -74,7 +99,19 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 <div id="page-wrapper">
 <div class="container">
 
-    <h3><?php  echo $_GET['album']; ?></h3>
+    <h3><?php  
+  
+  if (isset($_GET['album']))
+
+   {
+  
+  echo $_GET['album']; 
+    
+    }
+
+    ?>
+    
+    </h3>
 
 <div class="well">
 <div class="row">
@@ -103,8 +140,14 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
    $db2 = DB::getInstance();
            
    //getting album name
+
+   if (isset($_GET['album']))
+
+   {
         
     $name2 = $_GET['album']; 
+
+   
 
     //getting album no
 
@@ -119,11 +162,11 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
     foreach ($x1 as $value1)
 
                 {
-                   $albumNo = $value1[no];
+                   $albumNo = $value1['no'];
                    break;
                 }
 
-                
+               
 
     //getting user name
     
@@ -144,26 +187,31 @@ $x2 = $query2->results(true);
                     
                   echo("<div class='gallery'>");
 
-                   echo("<a target='_blank' href='upload/data/".$value2[folder]."/".$value2[file]."'>");
+                   echo("<a target='_blank' href='upload/data/".$value2['folder']."/".$value2['file']."'>");
 
-            echo("<img src='upload/data/".$value2[folder]."/resize".$value2[file]."' alt='' width='600' height='400'> </a>");
+            echo("<img src='upload/data/".$value2['folder']."/resize".$value2['file']."' alt='' width='600' height='400'> </a>");
                
             echo("</div>");
 
-          $catNo = $value2[no];
-          $fileValue = $value2[file];
-           $folderValue =  $value2[folder];
-           $albumName = $value2[pics_category];
+          $catNo = $value2['no'];
+          $fileValue = $value2['file'];
+           $folderValue =  $value2['folder'];
+           $albumName = $value2['pics_category'];    
 
-         echo("<button id='close-image' onclick='deleteFunction(\"$fileValue\",\"$folderValue\",\"$albumName\")'><img src='/users/album/images/erase.png'></button>");
+           $pathforimage = $path_for.'users/album/images/erase.png';
 
-          echo("<button id='close-image' onclick='moveFunction(\"$catNo\",\"$fileValue\",\"$folderValue\",\"$albumName\")'><img src='/users/album/images/move.png'></button>");
+            $pathforimage2 = $path_for.'users/album/images/move.png';
+
+
+         echo("<button id='close-image' onclick='deleteFunction(\"$fileValue\",\"$folderValue\",\"$albumName\")'><img src= '$pathforimage'></button>");
+
+          echo("<button id='close-image' onclick='moveFunction(\"$catNo\",\"$fileValue\",\"$folderValue\",\"$albumName\")'><img src='$pathforimage2'></button>");
 
             echo("</div>");
                                            
                 }
           
-             
+   }
 
             ?>
 

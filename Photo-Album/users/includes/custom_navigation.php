@@ -147,7 +147,7 @@ $x = $query->results(true);
                 {
                                        
                               
-                    echo("<li><a href='/Photo-Albums/Photo-Album/users/album/album.php?album=$value[album_name]'><i class='fa fa-fw fa-book'></i>" . $value['album_name'] . "</a></li>");
+                    echo("<li><a href=$us_url_root"."users/album/album.php?album=$value[album_name]><i class='fa fa-fw fa-book'></i>" . $value['album_name'] . "</a></li>");
                 }
 
                 echo("<li class='divider'></li>");

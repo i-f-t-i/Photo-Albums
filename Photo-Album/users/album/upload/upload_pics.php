@@ -1,26 +1,40 @@
 
 
 <?php 
+
+$abs_us_root=$_SERVER['DOCUMENT_ROOT'];
+
+$self_path=explode("/", $_SERVER['PHP_SELF']);
+$self_path_length=count($self_path);
+$file_found=FALSE;
+
+for($i = 1; $i < $self_path_length; $i++){
+	array_splice($self_path, $self_path_length-$i, $i);
+	$us_url_root=implode("/",$self_path)."/";
+	
+	if (file_exists($abs_us_root.$us_url_root.'z_us_root.php')){
+		$file_found=TRUE;
+		break;
+	}else{
+		$file_found=FALSE;
+	}
+}
+
+require_once $abs_us_root.$us_url_root.'users/init.php';
  
-  $path = $_SERVER['DOCUMENT_ROOT'];
-  $path .= "/users/init.php";
- 
- 
-  require_once ($path); 
+
   
-  ?>
-
-
-<?php
     
  if (!isset ($_GET['cat'])){
      
-     header("Location: /users/album/upload_pics.php");
+$uri .= '../upload_pics.php';
+header("Location: $uri");
+exit;
 
-			exit();
+			
 
  }
-   session_start();
+
 
     $db2 = DB::getInstance();
 
@@ -38,12 +52,12 @@
 
  $x1 = $query1->results(true);
 
-   
+   $albumNo=NULL;
 
     foreach ($x1 as $value1)
 
                 {
-                   $albumNo = $value1[no];
+                   $albumNo = $value1['no'];
                    break;
                 }
 
@@ -54,6 +68,9 @@
 
 
 <?php
+require_once $abs_us_root.$us_url_root.'users/includes/custom_header.php';
+require_once $abs_us_root.$us_url_root.'users/includes/custom_navigation.php';    
+
 //dealing with if the user is logged in
 if($user->isLoggedIn() || !$user->isLoggedIn() && !checkMenu(2,$user->data()->id)){
 	if (($settings->site_offline==1) && (!in_array($user->data()->id, $master_account)) && ($currentPage != 'login.php') && ($currentPage != 'maintenance.php')){
@@ -75,8 +92,10 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 
 
 
-<!DOCTYPE html>
-<html lang="en">
+<div id="page-wrapper">
+<div class="container">
+<div class="well">
+<div class="row">
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -95,12 +114,12 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 
     <p>
 
-    <a href="/users/album/album.php">Albums</a>
+    <a href="<?php echo $us_url_root;?>users/album/album.php">Albums</a>
   
      > 
 
 
-    <a href="/users/album/upload_pics.php">Upload</a>
+    <a href="<?php echo $us_url_root;?>users/album/upload_pics.php">Upload</a>
 
     </p>
 
@@ -129,7 +148,15 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 
    
 
+ </div> <!-- /.col -->
+		</div> <!-- /.row -->
+	</div> <!-- /.container -->
+</div> <!-- /.wrapper -->
 
 
-</body>
-</html>
+     <!-- footers -->
+<?php require_once $abs_us_root.$us_url_root.'users/includes/page_footer.php'; // the final html footer copyright row + the external js calls ?>
+
+<!-- Place any per-page javascript here -->
+
+<?php require_once $abs_us_root.$us_url_root.'users/includes/html_footer.php'; // currently just the closing /body and /html ?>

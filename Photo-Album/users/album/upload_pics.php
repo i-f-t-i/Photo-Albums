@@ -1,20 +1,28 @@
 
 <?php 
  
-  $path = $_SERVER['DOCUMENT_ROOT'];
-  $path .= "/Photo-Albums/Photo-Album/users/init.php";
- 
- 
-  require_once ($path); 
+$abs_us_root=$_SERVER['DOCUMENT_ROOT'];
+
+$self_path=explode("/", $_SERVER['PHP_SELF']);
+$self_path_length=count($self_path);
+$file_found=FALSE;
+
+for($i = 1; $i < $self_path_length; $i++){
+	array_splice($self_path, $self_path_length-$i, $i);
+	$us_url_root=implode("/",$self_path)."/";
+	
+	if (file_exists($abs_us_root.$us_url_root.'z_us_root.php')){
+		$file_found=TRUE;
+		break;
+	}else{
+		$file_found=FALSE;
+	}
+}
+
+require_once $abs_us_root.$us_url_root.'users/init.php';
   
   ?>
 
-<?php 
-
-   session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
-
-
-?>
 
 <?php require_once $abs_us_root.$us_url_root.'users/includes/custom_header.php'; ?>
 <?php require_once $abs_us_root.$us_url_root.'users/includes/custom_navigation.php'; ?>
@@ -38,15 +46,21 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 ?>
 
 <?php
+    
+if (isset($_POST['formSubmit']))
+
+   {
 	
     if($_POST['formSubmit'] == "Submit") 
     
     {
 
-        header("Location: /users/album/upload/upload_pics.php?cat=".$_POST['access']."");
+        header("Location: upload/upload_pics.php?cat=".$_POST['access']."");
 
 		
 	}
+
+   }
 
 
 ?>
