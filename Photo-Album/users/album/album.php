@@ -157,7 +157,7 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 
     $x1 = $query1->results(true);
 
-   
+   $albumNo = NULL;
 
     foreach ($x1 as $value1)
 
@@ -221,6 +221,105 @@ $x2 = $query2->results(true);
     </div>
 
             </div>
+
+    <!-- If album name not set -->
+
+    <?php  
+  
+  if (!isset($_GET['album']))
+
+   {
+       ?>
+
+
+    <div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+
+       
+
+     <?php 
+ 
+ $pathforimage3 = $path_for.'users/album/images/albums.png';
+
+  $path_create_album = $path_for.'users/album/create_album.php';
+ 
+ echo("<img src='$pathforimage3'>");  ?>
+
+      <div class="caption">
+        <h3 style="text-align: center;">Create an Album</h3>
+        
+        <p style="text-align: center;"><a href="<?php  echo ("$path_create_album"); ?>" class="btn btn-primary" role="button">Create</a></p>
+      </div>
+   
+        
+         </div>
+
+  </div>
+
+
+
+ <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+
+       
+
+     <?php 
+ 
+ $pathforimage3 = $path_for.'users/album/images/upload.png';
+
+  $path_create_album = $path_for.'users/album/upload_pics.php';
+ 
+ echo("<img src='$pathforimage3'>");  ?>
+
+      <div class="caption">
+        <h3 style="text-align: center;">Upload Pictures</h3>
+        
+        <p style="text-align: center;"><a href="<?php  echo ("$path_create_album"); ?>" class="btn btn-primary" role="button">Upload</a></p>
+      </div>
+   
+        
+         </div>
+
+  </div>
+
+
+ <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+
+       
+
+     <?php 
+ 
+ $pathforimage3 = $path_for.'users/album/images/pic_folder.png';
+
+  $path_create_album = $path_for.'users/album/list_albums.php';
+ 
+ echo("<img src='$pathforimage3'>");  ?>
+
+      <div class="caption">
+        <h3 style="text-align: center;">Albums</h3>
+        
+        <p style="text-align: center;"><a href="<?php  echo ("$path_create_album"); ?>" class="btn btn-primary" role="button">Albums</a></p>
+      </div>
+   
+        
+         </div>
+
+  </div>
+
+
+
+</div>
+
+
+       <?php  
+  
+   }
+       ?>
+
+
+ <!-- ------------------- -->
 
 
 
