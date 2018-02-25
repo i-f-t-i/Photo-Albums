@@ -89,21 +89,26 @@ $x = $query->results(true);
                 
                foreach ($x as $value)
                 {
-                                       
+                     
+                     $albumName = $value['album_name'];  
+                     
+                     ?>                
                               
-                    echo("<li class='hidden-sm hidden-md hidden-lg'><a href='<?=$us_url_root?>users/album/album.php?album=$value[album_name]'><i class='fa fa-fw fa-book'></i> " . $value['album_name'] . "</a></li>");
-
+                    <li class='hidden-sm hidden-md hidden-lg'><a href="<?= $us_url_root?>users/album/album.php?album=<?= urlencode($albumName) ?>"><i class='fa fa-fw fa-book'></i> <?= $value['album_name'] ?> </a></li>
+                <?php
                 
                 }
 
                echo("<li class='divider'></li>");
 
-              echo("<li class='hidden-sm hidden-md hidden-lg'><a href=''><i class='fa fa-fw fa'></i> </a></li>"); 
+              echo("<li class='hidden-sm hidden-md hidden-lg'><i class='fa fa-fw fa'></i> </a></li>"); 
 
-             echo("<li class='hidden-sm hidden-md hidden-lg'><a href='<?=$us_url_root?>users/album/delete_album.php'><i class='fa fa-fw fa-cut'></i>Delete Album</a></li>");
+               ?>
+
+                 <li class='hidden-sm hidden-md hidden-lg'><a href='<?=$us_url_root?>users/album/delete_album.php'><i class='fa fa-fw fa-cut'></i>Delete Album</a></li>
 
 
-            ?>
+           
 
 
 
@@ -145,9 +150,9 @@ $x = $query->results(true);
                 
                foreach ($x as $value)
                 {
-                                       
+                      $albumName = $value['album_name'];                   
                               
-                    echo("<li><a href=$us_url_root"."users/album/album.php?album=$value[album_name]><i class='fa fa-fw fa-book'></i>" . $value['album_name'] . "</a></li>");
+                    echo("<li><a href=$us_url_root"."users/album/album.php?album=".urlencode($albumName)."><i class='fa fa-fw fa-book'></i>" . $value['album_name'] . "</a></li>");
                 }
 
                 echo("<li class='divider'></li>");
