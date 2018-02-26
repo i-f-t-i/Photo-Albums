@@ -13,4 +13,10 @@
 2. Run index.php ( Photo-Album/index.php )
 3. Follow instructions to complete the installation process.
 
+## Default Users & Passwords
+
+1. admin (password is password)
+2. user  (password is password)
+
+
  
