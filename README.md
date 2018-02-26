@@ -15,8 +15,8 @@
 
 ## Default Users & Passwords
 
-1. admin (password is password)
-2. user  (password is password)
+1. admin ( password is password )
+2. user  ( password is password )
 
 
  
