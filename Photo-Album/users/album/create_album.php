@@ -180,7 +180,7 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
     <select class="form-control" id="access"  name ="access" >
 
     <option>Private</option>
-    <option>Public</option>
+    
    
    
   </select>
