@@ -4,7 +4,7 @@
  
 ## Requirements
 
- 1. PHP 5.6
+ 1. PHP 5.6 +
  2. MySQL
 
 ## Installation Instructions
