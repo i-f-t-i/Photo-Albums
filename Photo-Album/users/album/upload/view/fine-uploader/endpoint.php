@@ -70,7 +70,7 @@ $uploader = new UploadHandler();
 $uploader->allowedExtensions = array("jpeg","jpg","gif","png"); // all files types allowed by default
 
 // Specify max file size in bytes.
-$uploader->sizeLimit = null;
+$uploader->sizeLimit = 1048576; // 1 MB
 
 // Specify the input name set in the javascript.
 $uploader->inputName = "qqfile"; // matches Fine Uploader's default inputName value by default
@@ -118,7 +118,9 @@ if ($method == "POST") {
         // To return a name used for uploaded file you can use the following line.
         $result["uploadName"] = $uploader->getUploadName();
 
-       
+       if (isset($result["uploadName"]))
+
+       {
 
         $db = DB::getInstance();
 
@@ -165,6 +167,7 @@ if ($method == "POST") {
 
 	// $magicianObj -> saveImage('../../data/06cdc2ad-8f9b-4193-9d21-0739b0dc0cf2/test.jpg');
 
+       }
 
     }
 
