@@ -181,7 +181,10 @@ INSERT INTO `pages` (`id`, `page`, `private`) VALUES
 (53, 'users/album/public_profile.php', 1),
 (55, 'users/album/upload_pics.php', 1),
 (56, 'users/album/upload/upload_pics.php', 1),
-(57, 'users/admin_total_albums.php', 1);
+(57, 'users/admin_total_albums.php', 1),
+(58, 'users/album/list_albums.php', 1);
+
+
 
 
 
