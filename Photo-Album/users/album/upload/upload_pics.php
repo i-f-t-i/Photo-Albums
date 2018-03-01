@@ -138,6 +138,12 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
             element: document.getElementById("file-drop-area"),
             request: {
                 endpoint: 'view/fine-uploader/endpoint.php'
+            },
+      
+            validation: {
+                allowedExtensions: ['jpeg', 'jpg', 'gif','png'],
+                itemLimit: 40, // not more than 40 files
+                sizeLimit: 1048576 // 1 mb
             }
         });
     </script>
