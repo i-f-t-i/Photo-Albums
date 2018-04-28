@@ -66,6 +66,9 @@ $monthCount = $usersMonthQ->count();
 $usersQ = $db->query("SELECT * FROM users");
 $user_count = $usersQ->count();
 
+$usersAlbumsQ = $db->query("SELECT * FROM album");
+$user_album_count = $usersAlbumsQ->count();
+
 $pagesQ = $db->query("SELECT * FROM pages");
 $page_count = $pagesQ->count();
 
@@ -285,15 +288,14 @@ if(!empty($_POST['social'])){
 <div id="page-wrapper"> <!-- leave in place for full-screen backgrounds etc -->
 <div class="container"> <!-- -fluid -->
 
-<h1 class="text-center">UserSpice Dashboard Version <?=$user_spice_ver?></h1>
-<p class="text-center"><a href="check_updates.php">(Check for Updates)</a>   <a href="admin_backup.php">(Backup UserSpice)</a></p>
+<h1 class="text-center">Admin Dashboard</h1>
 
 <div class="row"> <!-- row for Users, Permissions, Pages, Email settings panels -->
 	<h2>Admin Panels</h2>
 	<!-- Users Panel -->
 	<div class="col-xs-6 col-md-3">
 	<div class="panel panel-default">
-	<div class="panel-heading"><strong>Users</strong></div>
+	<div class="panel-heading"><strong>Total Users</strong></div>
 	<div class="panel-body text-center"><div class="huge"> <i class='fa fa-user fa-1x'></i> <?=$user_count?></div></div>
 	<div class="panel-footer">
 	<span class="pull-left"><a href="admin_users.php">Manage</a></span>
@@ -302,6 +304,21 @@ if(!empty($_POST['social'])){
 	</div> <!-- /panel-footer -->
 	</div><!-- /panel -->
 	</div><!-- /col -->
+
+    	<!-- Pages Panel -->
+	<div class="col-xs-6 col-md-3">
+	<div class="panel panel-default">
+	<div class="panel-heading"><strong>Total Albums</strong></div>
+	<div class="panel-body  text-center"><div class="huge"> <i class='fa fa-file-text fa-1x'></i> <?=$user_album_count?></div></div>
+	<div class="panel-footer">
+	<span class="pull-left"><a href="admin_total_albums.php">Manage</a></span>
+	<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	<div class="clearfix"></div>
+	</div> <!-- /panel-footer -->
+	</div><!-- /panel -->
+	</div><!-- /col -->
+
+
 
 	<!-- Permissions Panel -->
 	<div class="col-xs-6 col-md-3">
@@ -316,18 +333,7 @@ if(!empty($_POST['social'])){
 	</div><!-- /panel -->
 	</div> <!-- /.col -->
 
-	<!-- Pages Panel -->
-	<div class="col-xs-6 col-md-3">
-	<div class="panel panel-default">
-	<div class="panel-heading"><strong>Pages</strong></div>
-	<div class="panel-body  text-center"><div class="huge"> <i class='fa fa-file-text fa-1x'></i> <?=$page_count?></div></div>
-	<div class="panel-footer">
-	<span class="pull-left"><a href="admin_pages.php">Manage</a></span>
-	<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-	<div class="clearfix"></div>
-	</div> <!-- /panel-footer -->
-	</div><!-- /panel -->
-	</div><!-- /col -->
+
 
 	<!-- Email Settings Panel -->
 	<div class="col-xs-6 col-md-3">
@@ -750,3 +756,4 @@ if(file_exists($abs_us_root.$us_url_root.'usersc/includes/admin_panels.php')){
 	</script>
 
 <?php require_once $abs_us_root.$us_url_root.'users/includes/html_footer.php'; // currently just the closing /body and /html ?>
+
