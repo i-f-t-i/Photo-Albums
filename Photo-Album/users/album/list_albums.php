@@ -60,7 +60,7 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
     
    $user_no_info = $user->data()->id; 
 
-$usersAlbumsQ = $db->query("SELECT album_name FROM album WHERE user_no='".$user_no_info."' ORDER BY user_no ASC");
+$usersAlbumsQ = $db->query("SELECT no,album_name,publicORprivate FROM album WHERE user_no='".$user_no_info."' ORDER BY user_no ASC");
 
 $album_info = $usersAlbumsQ->results(true);
 
@@ -87,7 +87,7 @@ $album_info = $usersAlbumsQ->results(true);
 			  <br>
 			  <table class='table table-hover table-list-search'>
 				<tr>
-				  <th>No</th><th>Albums</th>
+				  <th>No</th><th>Albums</th><th>Modify</th><th>Access</th>
 				</tr>
 
 				<?php
@@ -95,6 +95,8 @@ $album_info = $usersAlbumsQ->results(true);
                   $count_no = 1;
 
                   $pathforimage2 = $path_for.'users/album/album.php?album=';
+
+                  $pathforModify = $path_for.'users/album/update_album.php?album=';
 				
 				foreach ($album_info as $Data) {
 				  ?>
@@ -102,7 +104,14 @@ $album_info = $usersAlbumsQ->results(true);
 					<td><?=$count_no;?></a></td>
 
 					<td> <a href="<?php echo ("$pathforimage2"); echo ($Data['album_name']); ?>"><?= $Data["album_name"]; ?> </a>  </td>
+
+                    <td> <a href="<?php echo ("$pathforModify"); echo ($Data['no']); ?>"><?php echo "Update/Modify"; ?> </a>  </td>
+
+                    <td> <a href="<?php echo ("$pathforModify"); echo ($Data['no']); ?>"><?= $Data["publicORprivate"]; ?> </a>  </td>
+
 				  </tr>
+
+
 				  <?php
           
                  $count_no+=1;
