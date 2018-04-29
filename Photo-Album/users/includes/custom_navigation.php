@@ -105,11 +105,11 @@ $x = $query->results(true);
 
                ?>
 
+                   <li class='hidden-sm hidden-md hidden-lg'><a href='<?=$us_url_root?>users/album/list_albums.php'><i class='fa fa-fw fa-book'></i>List of Albums</a></li>
+
                  <li class='hidden-sm hidden-md hidden-lg'><a href='<?=$us_url_root?>users/album/delete_album.php'><i class='fa fa-fw fa-cut'></i>Delete Album</a></li>
 
-
-           
-
+                
 
 
 					<li><a href="<?=$us_url_root?>users/album/create_album.php"><i class="fa fa-fw fa-book"></i> <?php echo "Create Album";?></a></li> <!-- Common for Hamburger and Regular menus link -->
@@ -158,13 +158,15 @@ $x = $query->results(true);
                 echo("<li class='divider'></li>");
 
 
+         echo("<li><a href=$us_url_root"."users/album/list_albums.php><i class='fa fa-fw fa-book'></i>List of Albums</a></li>");
+
+                echo("<li class='divider'></li>");
+
+
          echo("<li><a href=$us_url_root"."users/album/delete_album.php><i class='fa fa-fw fa-cut'></i>Delete Album</a></li>");
 
 
             ?>
-
-					
-
 
 
 						<?php if($settings->messaging == 1){ ?>
