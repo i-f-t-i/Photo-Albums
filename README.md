@@ -1,4 +1,4 @@
-# Photo Album V 1.0
+# Photo Album V 1.5
  
  Upload your pictures to your own online albums
  
