@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 ?>
 <?php require_once 'init.php'; ?>
-<?php require_once $abs_us_root.$us_url_root.'users/includes/header.php'; ?>
+<?php  require_once $abs_us_root.$us_url_root.'users/includes/header.php'; ?>
 <?php require_once $abs_us_root.$us_url_root.'users/includes/navigation.php'; ?>
 <?php if (!securePage($_SERVER['PHP_SELF'])){die();} ?>
 <?php
@@ -58,6 +58,31 @@ else
 	$editbio = ' <small><a href="/">Go to the homepage</a></small>';
 	}
 ?>
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>Gallery</title>
+
+
+  <!-- blueimp-gallery POP Up Picture Style Sheet --> 
+
+
+        <link rel="stylesheet" href="album/css/blueimp-gallery.min.css">
+
+<!-- Gallery pictures Style Sheet --> 
+
+         <link rel="stylesheet" href="album/css/gallerystyle1.css">
+
+          </head>
+    <body>
+
+
+
    <div id="page-wrapper">
 
 		 <div class="container">
@@ -75,7 +100,180 @@ else
 					</div>
 				</div>
 				
-										<a class="btn btn-success" href="view_all_users.php" role="button">All Users</a>
+										
+
+               <!--------List Albums------->
+
+<?php
+    
+
+if(isset($_GET['id']))
+
+{
+
+             $usersAlbumsQ = $db->query("SELECT album_name FROM album WHERE user_no='".$userID."' AND publicORprivate = 'Public' ORDER BY user_no ASC");
+
+$file_info = $usersAlbumsQ->results(true);
+
+?>
+
+              <div class="btn-group">
+    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+    Public Albums <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+
+        <?php
+
+
+                  
+				
+				foreach ($file_info as $Data) {
+				 
+                  ?>
+
+      <li><a href="profile.php?id=<?= $userID; ?>&album=<?= $Data["album_name"]; ?>"><?= $Data["album_name"]; ?></a></li>
+      
+         <?php
+
+				}
+
+}
+
+				?>
+
+    </ul>
+  </div>
+
+
+
+
+              <!--------Public Albums------->
+
+
+           
+
+
+
+             <h3><?php  
+  
+  if (isset($_GET['album']))
+
+   {
+  
+  echo $_GET['album']; 
+    
+    }
+
+    ?>
+    
+    </h3>
+
+<div class="well">
+<div class="row">
+
+   
+    
+
+    <div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    </div>
+
+       
+
+    <div class="content slide">     <!--	Add "slideRight" class to items that move right when viewing Nav Drawer  -->
+
+<div id="links">
+
+       <?php
+           
+   $db2 = DB::getInstance();
+           
+   //getting album name
+
+   if (isset($_GET['album']))
+
+   {
+        
+    $name2 = $_GET['album']; 
+
+   
+
+    //getting album no
+
+    $user_no_info = $user->data()->id; 
+
+    $query1 = $db2->query("SELECT * FROM album WHERE album_name='".$name2."'AND user_no='".$user_no_info."' AND publicORprivate = 'Public'"); 
+
+    $x1 = $query1->results(true);
+
+   $albumNo = NULL;
+
+    foreach ($x1 as $value1)
+
+                {
+                   $albumNo = $value1['no'];
+                   break;
+                }
+
+               
+
+    //getting user name
+    
+   $user_no_info = $user->data()->id;       
+
+//getting pictures info for a user
+
+$query2 = $db2->query("SELECT * FROM pics_category WHERE pics_category='".$albumNo."' AND user_no='".$user_no_info."'");
+
+$x2 = $query2->results(true);
+
+                               
+               foreach ($x2 as $value2)
+
+                {
+
+                   echo(" <div class='responsive'>");
+                    
+                  echo("<div class='gallery'>");
+
+                   echo("<a target='_blank' href='album/upload/data/".$value2['folder']."/".$value2['file']."'>");
+
+            echo("<img src='album/upload/data/".$value2['folder']."/resize".$value2['file']."' alt='' width='600' height='400'> </a>");
+               
+            echo("</div>");
+
+          $catNo = $value2['no'];
+          $fileValue = $value2['file'];
+           $folderValue =  $value2['folder'];
+           $albumName = $value2['pics_category'];    
+
+ 
+            echo("</div>");
+                                           
+                }
+          
+   }
+
+            ?>
+
+
+
+
+    </div>
+
+            </div>
+
+     </div> <!-- /.col -->
+		</div> <!-- /.row -->
+
+
+              <!--------Pulbic Albums------->
 
 
     </div> <!-- /container -->
@@ -86,3 +284,25 @@ else
 <?php require_once $abs_us_root.$us_url_root.'users/includes/page_footer.php'; // the final html footer copyright row + the external js calls ?>
 <!-- Place any per-page javascript here -->
 <?php require_once $abs_us_root.$us_url_root.'users/includes/html_footer.php'; // currently just the closing /body and /html ?>
+
+
+   
+  <!-- Photo Pop Up Click Javascript -->       
+
+        <script>
+document.getElementById('links').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+</script>
+
+    <script src="album/js/blueimp-gallery.min.js"></script>
+        
+
+ </body>    
+
+</html>
