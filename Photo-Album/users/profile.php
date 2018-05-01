@@ -25,38 +25,51 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <?php
 //PHP Goes Here!
 
-if($user->isLoggedIn()) { $thisUserID = $user->data()->id;} else { $thisUserID = 0; }
 
-if(isset($_GET['id']))
-	{
-	$userID = Input::get('id');
-	
-	$userQ = $db->query("SELECT * FROM profiles LEFT JOIN users ON user_id = users.id WHERE user_id = ?",array($userID));
-	$thatUser = $userQ->first();
+if(isset($_GET['id'])) $userID = Input::get('id');
 
-	if($thisUserID == $userID)
-		{
-		$editbio = ' <small><a href="edit_profile.php">Edit Bio</a></small>';
-		}
-	else
-		{
-		$editbio = '';
-		}
-	
-	$ususername = ucfirst($thatUser->username)."'s Profile";
-	$grav = get_gravatar(strtolower(trim($thatUser->email)));
-	$useravatar = '<img src="'.$grav.'" class="img-thumbnail" alt="'.$ususername.'">';
-	$usbio = html_entity_decode($thatUser->bio);
-	//Uncomment out the line below to see what's available to you.
-	//dump($thisUser);
-	}
 else
-	{
-	$ususername = '404';
-	$usbio = 'User not found';
-	$useravatar = '';
-	$editbio = ' <small><a href="/">Go to the homepage</a></small>';
-	}
+
+{
+    
+    if(!isset($user->data()->id)){
+        
+        exit();
+    }
+    
+    $userID = $user->data()->id;
+    
+}
+
+$userQ = $db->query("SELECT * FROM profiles LEFT JOIN users ON user_id = users.id WHERE user_id = ?",array($userID));
+
+
+if ($userQ->count() > 0) {
+    $thatUser = $userQ->first();
+    
+    if($user->isLoggedIn() && $user->data()->id == $userID)
+    {
+        $editbio = ' <small><a href="edit_profile.php">Edit Bio</a></small>';
+    }
+    else
+    {
+        $editbio = '';
+    }
+    
+    $ususername = ucfirst($thatUser->username)."'s Profile";
+    $grav = get_gravatar(strtolower(trim($thatUser->email)));
+    $useravatar = '<img src="'.$grav.'" class="img-thumbnail" alt="'.$ususername.'">';
+    $usbio = html_entity_decode($thatUser->bio);
+    //Uncomment out the line below to see what's available to you.
+    //dump($thisUser);
+}
+else
+{
+    $ususername = '404';
+    $usbio = 'User not found';
+    $useravatar = '';
+    $editbio = ' <small><a href="/">Go to the homepage</a></small>';
+}
 ?>
 
 
@@ -203,12 +216,12 @@ $file_info = $usersAlbumsQ->results(true);
     $name2 = $_GET['album']; 
 
    
-
+    
     //getting album no
 
-    $user_no_info = $user->data()->id; 
+ 
 
-    $query1 = $db2->query("SELECT * FROM album WHERE album_name='".$name2."'AND user_no='".$user_no_info."' AND publicORprivate = 'Public'"); 
+    $query1 = $db2->query("SELECT * FROM album WHERE album_name='".$name2."'AND user_no='".$userID."' AND publicORprivate = 'Public'"); 
 
     $x1 = $query1->results(true);
 
@@ -225,11 +238,11 @@ $file_info = $usersAlbumsQ->results(true);
 
     //getting user name
     
-   $user_no_info = $user->data()->id;       
+     
 
 //getting pictures info for a user
 
-$query2 = $db2->query("SELECT * FROM pics_category WHERE pics_category='".$albumNo."' AND user_no='".$user_no_info."'");
+   $query2 = $db2->query("SELECT * FROM pics_category WHERE pics_category='".$albumNo."' AND user_no='".$userID."'");
 
 $x2 = $query2->results(true);
 
