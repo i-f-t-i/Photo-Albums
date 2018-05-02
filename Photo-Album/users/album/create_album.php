@@ -181,7 +181,7 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 
     <option>Private</option>
     
-   
+   <option>Public</option>
    
   </select>
 
