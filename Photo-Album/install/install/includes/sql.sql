@@ -155,7 +155,7 @@ INSERT INTO `pages` (`id`, `page`, `private`) VALUES
 (19, 'users/joinThankYou.php', 0),
 (20, 'users/login.php', 0),
 (21, 'users/logout.php', 0),
-(22, 'users/profile.php', 1),
+(22, 'users/profile.php', 0),
 (23, 'users/times.php', 0),
 (24, 'users/user_settings.php', 1),
 (25, 'users/verify.php', 0),
@@ -182,8 +182,8 @@ INSERT INTO `pages` (`id`, `page`, `private`) VALUES
 (55, 'users/album/upload_pics.php', 1),
 (56, 'users/album/upload/upload_pics.php', 1),
 (57, 'users/admin_total_albums.php', 1),
-(58, 'users/album/list_albums.php', 1);
-
+(58, 'users/album/list_albums.php', 1),
+(59, 'users/album/update_album.php', 1);
 
 
 
