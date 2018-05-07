@@ -275,7 +275,7 @@ CREATE TABLE `profiles` (
 --
 
 INSERT INTO `profiles` (`id`, `user_id`, `bio`) VALUES
-(1, 1, '<h1>This is the Admin''s bio.</h1>'),
+(1, 1, '<h4>This is the Admin''s bio.</h4>'),
 (2, 2, 'This is your bio');
 
 -- --------------------------------------------------------
